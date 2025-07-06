@@ -59,3 +59,7 @@ let map = L.map('carte').setView([50.8503, 4.3517], 13);
             .catch(error => {
                 console.error('Erreur:', error);
             });
+
+document.getElementById('toggle-dark').onclick = function() {
+    document.body.classList.toggle('dark-mode');
+};

@@ -17,8 +17,8 @@
 <body>
     <div class="header">
         <h1>Carte interactive<img class="loc" src="img/icons8-location-50.png"></h1>
-        <h2>Les stations cambio</h2>
-        <div class="button">
+        <h2>Les stations cambio <img src="img/cambio.png" alt="logo" id="cambio"></h2>
+        <div class="buttonAdmin">
             <a href="./?pg=connexion">Connexion à l'administration<img class="fleche" src="img/icons8-droit-3-48.png"></a>
         </div>
     </div>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <footer class="footer">
-        © <?= date('Y') ?> TI3-2025 — Carte interactive | Réalisé par votre équipe
+        © <?= date('Y') ?> TI3-2025 — Carte interactive | Réalisé par Massine Abgar
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

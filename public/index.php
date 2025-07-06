@@ -40,4 +40,4 @@ if (isset($_SESSION['username'])) {
 // var_dump($db);
 // var_dump($localisations);
 
-// $db = null;
+$db = null;

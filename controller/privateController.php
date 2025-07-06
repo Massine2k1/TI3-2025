@@ -9,30 +9,40 @@ if (isset($_GET['pg']) && $_GET['pg'] === 'admin') {
 
     require_once "../view/private/admin.php";
 
-} elseif (isset($_GET['pg']) && $_GET['pg'] === 'creation') {
+}elseif (isset($_GET['pg']) && $_GET['pg'] === 'creation') {
 
+    $displaySuccess = "d-none";
+    $displayForm = "";
 
     if (isset($_POST['nom'], $_POST['ville'])) {
+
 
         $insert = insertLocalisation($db, $_POST);
 
         if ($insert) {
-            header('Location: ./?pg=admin');
-            exit();
+            $displayForm = "d-none";
+            $displaySuccess = "";
+            $alertsuccess = "alert alert-success";
+            $jsDirect = "<script>
+                            setTimeout(() => {
+                        window.location.href = './?pg=admin';
+                        }, 3000); // Redirects after 3 seconds
+                        </script>";
+                        
         } else {
-            $errorCreate="Les champs du formulaires ne sont pas valides ou ne sont pas remplis";
+            $errorCreate="Les champs du formulaire ne sont pas valides ou ne sont pas remplis";
         }
     }
 
     require_once "../view/private/creation.php";
 
-} elseif (isset($_GET['pg']) && $_GET['pg'] === "disconnect") {
+}elseif(isset($_GET['pg']) && $_GET['pg'] === "disconnect") {
 
     if (disconnectUser()) {
         header("Location: ./");
         exit();
     }
-} elseif ($_GET['pg'] === "delete" && isset($_GET['idLocalisation']) && ctype_digit($_GET['idLocalisation'])) {
+}elseif(isset($_GET['pg']) && $_GET['pg'] === "delete" && isset($_GET['idLocalisation']) && ctype_digit($_GET['idLocalisation'])) {
     $idLocalisation = (int)$_GET['idLocalisation'];
    
     if (deleteLocalisation($db, $idLocalisation)) {
@@ -40,10 +50,12 @@ if (isset($_GET['pg']) && $_GET['pg'] === 'admin') {
         exit();
     }
 
-}elseif ($_GET['pg'] === "update" && isset($_GET['idLocalisation']) && ctype_digit($_GET['idLocalisation'])) {
+}elseif(isset($_GET['pg']) && $_GET['pg'] === "update" && isset($_GET['idLocalisation']) && ctype_digit($_GET['idLocalisation'])) {
         $idLocalisation = (int)$_GET['idLocalisation'];
 
-        
+            $displaySuccess = "d-none";
+            $displayForm = "";
+
         if(isset(
             $_POST['nom'],
             $_POST['ville'],
@@ -52,10 +64,16 @@ if (isset($_GET['pg']) && $_GET['pg'] === 'admin') {
 
             $update = updateLocalisationById($db,$_POST,$_GET['idLocalisation']);
             if($update){
-                header("Location: ./?pg=admin");
-                exit();
+                $displayForm = "d-none";
+                $displaySuccess = "";
+                $alertsuccess = "alert alert-success";
+                $jsDirect = "<script>
+                                setTimeout(() => {
+                            window.location.href = './?pg=admin';
+                            }, 3000); // Redirects after 3 seconds
+                            </script>";
             }else{
-                $errorUpdate ="Les champs du formulaires ne sont pas valides ou ne sont pas remplis";
+                $errorUpdate ="Les champs du formulaire ne sont pas valides ou ne sont pas remplis";
             }
         }
 

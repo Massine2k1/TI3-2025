@@ -7,21 +7,24 @@
   <title>Administration</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-</head>
-
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/input.css">
 <body class="bg-dark text-light">
 
   <?php require "menu.php"; ?>
 
   <div class="container mt-5">
-    <h1 class="mb-4 text-center">Tableau des localisations </h1>
+    <h1 class="mb-5 text-center">Tableau des localisations </h1>
     <?php
     if (!empty($localisations)):
       $nbloc = count($localisations);
       $nbloc > 1 ? $pluriel = "x" : $pluriel = "";
     ?>
-      <h2 class="mb-3">Il y a <?= $nbloc ?> lieu<?= $pluriel ?> <i class="bi bi-arrow-down-square"></i></h2>
-      <div class="table-responsive shadow-lg rounded">
+      <div class="d-flex flex-column align-items-center flex-sm-row justify-content-between g-5 mb-4">
+        <h2 class="mb-3">Il y a <?= $nbloc ?> lieu<?= $pluriel ?> <i class="bi bi-arrow-down-square"></i></h2>
+        <input type="text" class="form-control w-25" id="input" placeholder="Rechercher par nom...">
+      </div>
+      <div class="table-responsive shadow-lg rounded mb-5">
         <table class="table table-dark table-hover align-middle">
           <thead>
             <tr>
@@ -43,7 +46,7 @@
             ?>
               <tr>
                 <td><?= $l['id'] ?></td>
-                <td><?= $l['nom'] ?></td>
+                <td class="nom"><?= $l['nom'] ?></td>
                 <td><?= $l['adresse'] ?></td>
                 <td><?= $l['numero'] ?></td>
                 <td><?= $l['ville'] ?></td>
@@ -80,6 +83,28 @@
      <?php require "footer.php"; ?>
      
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+
+        const search = document.getElementById('input');
+        const tableRows = document.querySelectorAll('tbody tr');
+        
+        search.addEventListener('input', function() {
+          const searchValue = search.value.trim().toLowerCase();
+          
+          tableRows.forEach(row => {
+            const nomCell = row.querySelector('.nom'); 
+            const nomText = nomCell.textContent.toLowerCase();
+            
+            if (nomText.startsWith(searchValue)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+</script>
 </body>
 
 </html>

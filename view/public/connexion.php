@@ -12,7 +12,7 @@
 <body class="bg-dark text-light">
 
   <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
-    <div class="card bg-secondary bg-opacity-25 p-4 col-12 col-sm-10 col-md-8 col-lg-5">
+    <div class="card bg-secondary bg-opacity-25 p-4 col-12 col-sm-10 col-md-8 col-lg-5 text-light">
       <h2 class="text-center mb-4">
         <i class="bi bi-shield-lock-fill me-2"></i>Connexion
       </h2>
