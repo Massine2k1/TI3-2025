@@ -1,0 +1,19 @@
+  
+  .card{
+    display: none;
+  }
+  
+  
+  @media (max-width: 576px) { 
+    #input {
+      width: 50% !important;
+    }
+
+    .card{
+      display: block;
+    }
+
+    .table-responsive{
+      display: none;
+    }
+  }
