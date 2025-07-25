@@ -63,32 +63,51 @@ document.addEventListener('DOMContentLoaded',function () {
         });
     
         const toggle = document.getElementById('toggle-dark');
-        const day = document.querySelector('.day');
-        const night = document.querySelector('.night');
-    
-        if(localStorage.getItem('dark-mode')==='on'){
+        const toggleMobile = document.getElementById('toggle-dark-mobile'); 
+        const day = document.querySelectorAll('.day');
+        const night = document.querySelectorAll('.night');
+
+        if(localStorage.getItem('dark-mode') === 'on'){
             toggle.checked = true;
+            if(toggleMobile) toggleMobile.checked = true; 
         }
-        
+
         function Switcher() {
-            if(toggle.checked){
-                day.style.display = 'none';
-                night.style.display = 'block';
+            const isChecked = toggle.checked || (toggleMobile && toggleMobile.checked);
+            
+            if(isChecked){
+                day.forEach(el=>el.style.display = 'none');
+                night.forEach(el=>el.style.display='block');
                 document.body.classList.add('dark-mode');
-            }else{
-                day.style.display = 'block';
-                night.style.display = 'none';
+            } else {
+                day.forEach(el=>el.style.display = 'block');
+                night.forEach(el=>el.style.display='none');
                 document.body.classList.remove('dark-mode');
             }
         }
 
         Switcher();
 
-        toggle.addEventListener('change',function () {
+        toggle.addEventListener('change', function () {
+
+            if(toggleMobile) toggleMobile.checked = this.checked;
+            
             Switcher();
-            localStorage.setItem('dark-mode', this.checked ? 'on':'off');
-        })
+            localStorage.setItem('dark-mode', this.checked ? 'on' : 'off');
+        });
+
+        if(toggleMobile) {
+            toggleMobile.addEventListener('change', function () {
+                
+                toggle.checked = this.checked;
+                
+                Switcher();
+                localStorage.setItem('dark-mode', this.checked ? 'on' : 'off');
+            });
+        }
 });
+
+
 
 
 

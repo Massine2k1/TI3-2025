@@ -35,6 +35,10 @@
             padding: 2rem 1rem;
             text-align:center;
             margin-bottom: 2rem;
+            display: flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
         }
 
         .header h1{
@@ -48,7 +52,7 @@
 
         .header h2{
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             display:flex;
             align-items:center;
             justify-content: center;
@@ -222,6 +226,10 @@
             background: #aaa;
         }
 
+        nav{
+            display:none;
+        }
+
         body.dark-mode {
         background-color: #1a1a1a;
         color: #e0e0e0;
@@ -263,7 +271,7 @@
         }
 
         body.dark-mode .li li a:hover {
-            color: #f1c40f;
+            color: orange;
         }
 
         body.dark-mode .buttonAdmin a {
@@ -289,20 +297,106 @@
             background: #404040;
         }
 
+        @media (max-width: 640px) {
+        .containeur {
+            flex-direction: column;
+        }
+
+        #carte {
+            width: 100%;    
+            height: 300px;    
+            min-height: 200px;
+            margin-bottom: 1em;
+        }
+        .liste {
+            max-height: 600px;
+            width: 100%;      
+        }
+
+        .header{
+            margin-bottom: 2em;
+            padding: 0;
+        }
+
+        .header-title{
+            margin-top: 3rem;
+        }
+
+        .header h1{
+            font-size: 2rem;
+        }
+
+        .buttonAdmin{
+            display:none;
+            /* flex-direction: column; */
+        }   
+
+        /* .buttonAdmin span{
+            display: none;
+        } */
+
+        .burger{
+            align-self: flex-end;
+            margin-right: 2em;
+            margin-top: 1em;
+        }
+
+        .burger div{
+            height: 5px;
+            width: 40px;
+            margin-bottom: 5px;
+            background-color: white;
+            border-radius: 2px;
+        }
+
+        nav{
+            background-color: #1a252f;
+            margin-top: 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centre les enfants du nav */
+            gap: 1rem;
+            width: 100%;
+            padding: 2em 0;
+        }
+
+        .switch-container{
+            display: flex;
+            gap: 1em;
+        }
+
+        
+        }
+
     </style>
     <title>Document</title>
 </head>
 
 <body>
     <div class="header" id="header">
-        <h1>Carte interactive<img class="loc" src="img/icons8-location-50.png"></h1>
-        <h2>Les stations cambio <img src="img/cambio.png" alt="logo" id="cambio"></h2>
+        <div class="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav>
+            <div href="./?pg=connexion">Connexion à l'administration</div>
+            <div class="switch-container">
+                <div>Mode: </div>
+                <input type="checkbox" id="toggle-dark-mobile" class="switch-input"/>
+                <label for="toggle-dark-mobile" class="switch-label"><span class="day">DAY</span><span class="night">NIGHT</span></label>
+            </div>
+        </nav>
+        <div class="header-title">
+            <h1>Carte interactive<img class="loc" src="img/icons8-location-50.png"></h1>
+            <h2>Les stations cambio <img src="img/cambio.png" alt="logo" id="cambio"></h2>
+        </div>
         <div class="buttonAdmin">
             <div class="switch-container">
                 <input type="checkbox" id="toggle-dark" class="switch-input"/>
                 <label for="toggle-dark" class="switch-label"><span class="day">DAY</span><span class="night">NIGHT</span></label>
             </div>
-            |   <a href="./?pg=connexion">Connexion à l'administration</a>
+            <span>|</span>   <a href="./?pg=connexion">Connexion à l'administration</a>
         </div>
     </div>
     <div class="containeur">
