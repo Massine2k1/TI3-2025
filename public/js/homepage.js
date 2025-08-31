@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded',function () {
-    
+
     let map = L.map('carte').setView([50.8503, 4.3517], 13);
     
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -66,6 +65,7 @@ document.addEventListener('DOMContentLoaded',function () {
         const toggleMobile = document.getElementById('toggle-dark-mobile'); 
         const day = document.querySelectorAll('.day');
         const night = document.querySelectorAll('.night');
+        const nav = document.querySelector('nav');
 
         if(localStorage.getItem('dark-mode') === 'on'){
             toggle.checked = true;
@@ -105,8 +105,42 @@ document.addEventListener('DOMContentLoaded',function () {
                 localStorage.setItem('dark-mode', this.checked ? 'on' : 'off');
             });
         }
-});
 
+
+
+
+function slideToggle(element, duration = 400) {
+
+    const currentMaxHeight = window.getComputedStyle(element).maxHeight;
+    const isOpen = currentMaxHeight !== '0px' && currentMaxHeight !== 'none';
+    
+    if (isOpen) {
+
+        element.style.transition = `max-height ${duration}ms ease-out, padding ${duration}ms ease-out`;
+        element.style.maxHeight = '0px';
+        element.style.padding = '0';
+        
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, duration);
+    } else {
+
+        element.style.display = 'flex';
+        element.style.flexDirection = 'column';
+        element.style.alignItems = 'center';
+        element.style.gap = '1rem';
+        element.style.width = '100%';
+        element.offsetHeight;
+        
+        element.style.transition = `max-height ${duration}ms ease-out, padding ${duration}ms ease-out`;
+        element.style.maxHeight = '200px';
+        element.style.padding = '2em 0';
+    }
+}
+
+document.querySelector('.burger').addEventListener('click', () => {
+    slideToggle(nav);
+});
 
 
 
